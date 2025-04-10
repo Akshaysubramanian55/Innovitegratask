@@ -114,48 +114,57 @@ Database Schema (MongoDB with Mongoose)
   createdAt: Date
 }
 
+  API ENDPOINTS
 
- API Endpoints
+  1. Auth
+      POST /signup – Register a new user
 
- 1. Auth
- Method	    Endpoint	     Description	                 Auth Required
- POST	    /signup	      Register a new user	                 ❌
- POST	     /login	      Login and get token	                 ❌
+      POST /login – Login and get token
 
+  2. Expense Management
+     POST /submit-expense – Submit an expense with receipt(s)
 
- 2. Expense Management
+     GET /myexpenses – Get expenses of the logged-in user
 
- Method	          Endpoint	                            Description	                         Auth Required
- POST	       /submit-expense	                    Submit an expense with receipt(s)	           ❌
- GET	       /myexpenses	                        Get expenses of the logged-in user	           ✅
- GET	       /expenses/pending	                     Get all pending expenses	               ❌
- GET	       /expenses/approved	                     Get all approved expenses	               ❌
- POST	      /expenses/:id/:action	              Approve or reject expense by ID	               ❌
- GET	      /api/expenses	                         Admin: Get all expenses	                   ✅
+     GET /expenses/pending – Get all pending expenses
 
+     GET /expenses/approved – Get all approved expenses
 
- 3. Team Management
-   Method	   Endpoint	               Description	                   Auth Required
-    POST	 /teams/create	         Create a new team	                    ✅
-    GET	       /teams	         Get teams of the logged-in user	        ✅
-    PUT	    /teams/:id/budget	  Update budget for a team	                ✅
-    GET	      /admin/teams	        Admin: Get all teams	                ✅
+     POST /expenses/:id/:action – Approve or reject expense by ID
 
- 4. User Management
-  Method	   Endpoint	               Description	                        Auth Required
-   GET	    /users/employees	  Get all users with role 'employee'	         ✅
-   GET	      /admin/users	         Admin: Get all users	                     ✅
-  DELETE	    /admin/users/:id	  Admin: Delete user by ID	                 ✅
+     GET /api/expenses – Admin: Get all expenses
+
+  3. Team Management
+     POST /teams/create – Create a new team
+
+     GET /teams – Get teams of the logged-in user
+
+     PUT /teams/:id/budget – Update budget for a team
+
+     GET /admin/teams – Admin: Get all teams
+
+     GET /employee/teams – Get employee's teams
 
 
- 5. Categories & Budget
-  Method	    Endpoint	                    Description	                 Auth Required
-   POST	      /admin/categories	             Add a new category	                   ✅
-   GET	     /admin/categories	             Get all categories	                   ✅
-   PUT	     /admin/update/:id	             Update budget for a category	       ✅
-   POST	     /admin/comapnybudget	         Set company-wide budget	           ✅
-   GET	     /admin/getcomapnybudget	     Get company-wide budget	           ✅
+      // Controller route for employee teams
+            router.get('/employee/teams', verifyToken, Usercontroller.employeeteams);
+  4. User Management
+      GET /users/employees – Get all users with role 'employee'
 
+     GET /admin/users – Admin: Get all users
+
+     DELETE /admin/users/:id – Admin: Delete user by ID
+
+  5. Categories & Budget
+      POST /admin/categories – Add a new category
+
+      GET /admin/categories – Get all categories
+
+     PUT /admin/update/:id – Update budget for a category
+
+     POST /admin/comapnybudget – Set company-wide budget
+
+     GET /admin/getcomapnybudget – Get company-wide budget
 
    # Expense Management System Role Matrix
 
